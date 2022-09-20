@@ -1,7 +1,7 @@
 from flask import Flask
 from utils import get_value_by_title, get_value_by_release_year
 import json
-# /
+
 app = Flask(__name__)
 
 
