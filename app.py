@@ -20,7 +20,7 @@ def view_title(title):
 
 
 @app.route('/movie/year/<int:year>/to/<int:next_year>/')
-def view_release_year(year):
+def view_release_year(year, next_year):
     result = get_value_by_release_year(year, next_year)
     return app.response_class(
         response=json.dumps(result,
