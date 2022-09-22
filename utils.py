@@ -86,11 +86,10 @@ def get_value_by_rating(rating) -> list[dict]:
     и возвращает все фильмы определенного рейтинга
 
     Args:
-        year(int): film's release year
-        next_year(int)
+        rating
 
     Returns:
-        dict: information about films (title, release year) between requested years
+        list[dict]: information about films (title, rating, description) by rating
     """
 
     rating_designation = []
