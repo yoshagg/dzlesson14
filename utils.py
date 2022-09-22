@@ -49,7 +49,7 @@ def get_value_by_title(title: str) -> dict:
         return dict(item)
 
 
-def get_value_by_release_year(year: int, next_year: int) -> dict:
+def get_value_by_release_year(year: int, next_year: int) -> list[dict]:
     """
     This function passes the SQL request in function get_value_from_database
     and returns the movie by release year
@@ -69,13 +69,49 @@ def get_value_by_release_year(year: int, next_year: int) -> dict:
         SELECT title, release_year
         FROM netflix
         WHERE release_year BETWEEN {year} AND {next_year}
-        LIMIT 100
+        LIMIT 2
     '''
 
     result = get_value_from_database(sql)
+    result_list_of_dict = [dict(item) for item in result]
 
-    for item in result:
-        return dict(item)
+    return result_list_of_dict
+
+def get_value_by_rating(rating) -> list[dict]:
+    """
+    This function passes the SQL request in function get_value_from_database
+    and returns the movies by rating
+
+    Эта функция передаёт SQL запрос в функцию get_value_from_database
+    и возвращает все фильмы определенного рейтинга
+
+    Args:
+        year(int): film's release year
+        next_year(int)
+
+    Returns:
+        dict: information about films (title, release year) between requested years
+    """
+
+    rating_designation = None
+
+    if rating == "children".lower():
+        rating_designation = "G"
+    elif rating == "family".lower():
+        rating_designation = ["G", "PG", "PG-13"]
+    elif rating == "adult".lower():
+        rating_designation = [R, NC-17]
+
+
+    sql = f"""SELECT title, rating, description
+             FROM netflix
+             WHERE rating IN {rating_designation}
+             """
+
+    result = get_value_from_database(sql)
+    result_list_of_dict = [dict(item) for item in result]
+
+    return result_list_of_dict
 
 # title = "9"
 # get_value_by_title(title)
