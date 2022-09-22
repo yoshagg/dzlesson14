@@ -93,14 +93,14 @@ def get_value_by_rating(rating) -> list[dict]:
         dict: information about films (title, release year) between requested years
     """
 
-    rating_designation = None
+    rating_designation = []
 
     if rating == "children".lower():
-        rating_designation = "G"
+        rating_designation = ["G"]
     elif rating == "family".lower():
         rating_designation = ["G", "PG", "PG-13"]
     elif rating == "adult".lower():
-        rating_designation = [R, NC-17]
+        rating_designation = ["R", "NC-17"]
 
 
     sql = f"""SELECT title, rating, description
