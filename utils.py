@@ -95,11 +95,11 @@ def get_value_by_rating(rating) -> list[dict]:
     rating_designation = []
 
     if rating == "children".lower():
-        rating_designation = ["G"]
+        rating_designation = ",".join(['\"G\"'])
     elif rating == "family".lower():
-        rating_designation = ["G", "PG", "PG-13"]
+        rating_designation = ",".join(['\"G\", \"PG\", \"PG-13\"'])
     elif rating == "adult".lower():
-        rating_designation = ["R", "NC-17"]
+        rating_designation = ",".join(['\"R\", \"NC-17\"'])
 
 
     sql = f"""SELECT title, rating, description
